@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Achilles</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Project Achilles</h1>
+    <nav>
+      <button id="nav-today">Today</button>
+      <button id="nav-session">Session Details</button>
+      <button id="nav-log">Log & Analytics</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="view-today">
+      <h2>Today</h2>
+      <p>
+        Next session:
+        <strong>
+          <span id="today-session-type">?</span>
+          –
+          <span id="today-session-theme">?</span>
+          –
+          <span id="today-session-gear">Standard</span>
+        </strong>
+      </p>
+      <button id="apply-today-to-form">Use this plan in the form</button>
+    </section>
+
+    <section id="view-session" style="display:none;">
+    <h2>Log Session</h2>
+    <label>
+        Session Type:
+        <select id="session-type">
+        <option value="ST1">ST1</option>
+        <option value="ST2">ST2</option>
+        <option value="CD1">CD1</option>
+        <option value="CD2">CD2</option>
+        <option value="BK3">BK3</option>
+        </select>
+    </label>
+    <br>
+    <label>
+        Theme:
+        <select id="session-theme"></select>
+    </label>
+    <br>
+    <label>
+        Gear:
+        <select id="session-gear">
+        <option value="Standard">Standard</option>
+        <option value="Quick">Quick</option>
+        <option value="Easy">Easy</option>
+        </select>
+    </label>
+    <br>
+    <label>
+        RPE:
+        <input id="session-rpe" type="number" min="1" max="10" />
+    </label>
+    <br>
+    <label>
+        Notes:
+        <textarea id="session-notes"></textarea>
+    </label>
+    <br>
+    <button id="show-workout-modal" type="button">
+      Show Workout
+    </button>
+    <br>
+    <button id="save-session">Save Session</button>
+    </section> 
+
+    <section id="view-log" style="display:none;">
+      <h2>Log & Analytics</h2>
+        <table id="sessions-table" border="1" cellspacing="0" cellpadding="4">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Theme</th>
+                <th>Gear</th>
+                <th>RPE</th>
+                <th>Notes</th>
+            </tr>
+            </thead>
+            <tbody id="sessions-table-body">
+            <!-- Rows will be injected here by script.js -->
+            </tbody>
+        </table>
+    </section>
+  </main>
+
+  <!-- Workout Modal -->
+  <div id="workout-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <h2 id="workout-modal-title">Workout Plan</h2>
+      <div id="workout-modal-body"></div>
+
+      <div class="modal-actions">
+        <button id="workout-modal-log-btn" type="button">Log Session</button>
+        <button id="workout-modal-close-btn" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase JS library -->
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+<!-- Your app script (must come AFTER the Supabase script) -->
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
