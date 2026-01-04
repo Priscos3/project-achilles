@@ -761,12 +761,15 @@ function renderLog() {
   // Clear existing rows
   tbody.innerHTML = '';
 
+
   // Add a row for each session
   sessions.forEach((session) => {
     const tr = document.createElement('tr');
 
     const dateCell = document.createElement('td');
-    dateCell.textContent = formatSessionDate(session.date);
+
+dateCell.textContent = formatSessionDate(session.date);
+
     tr.appendChild(dateCell);
 
     const typeCell = document.createElement('td');
