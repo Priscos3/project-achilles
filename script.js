@@ -31,56 +31,134 @@ const workoutTemplates = {
     Lower: {
       Standard: `
         <h3>ST1 – Heavy Strength – Lower – Standard (30–45 min)</h3>
+        <p><strong>Goal:</strong> Build lower-body strength for drive, braking, and stability.</p>
+        <h4>A. Warm-up – 5–8 min</h4>
         <ul>
-          <li><strong>Warm-up / activation</strong></li>
-          <li><strong>Main lower:</strong> squat or hinge pattern</li>
-          <li><strong>Secondary pattern:</strong> lunge or hip hinge if you squatted</li>
-          <li><strong>Upper back / pulling move</strong></li>
-          <li><strong>Short core finisher (RC2)</strong></li>
+          <li>2–4 min easy bike / walk / jump rope</li>
+          <li>Dynamic series (1–2 sets each): walking lunges x 6–8 steps/leg, leg swings x 10/leg, bodyweight squat x 10, hip airplanes or single-leg RDL reach x 5/leg</li>
+        </ul>
+        <h4>B. Main Lift – Squat Pattern (Heaviest Work)</h4>
+        <ul>
+          <li>Choose one: high-bar back squat, front squat, or trap bar deadlift (squatty stance)</li>
+          <li>4 × 4–6 @ RPE 7–8, rest 2–3 min</li>
+        </ul>
+        <h4>C. Secondary Lift – Hinge or Hip-Dominant</h4>
+        <ul>
+          <li>RDL or hip thrust/glute bridge</li>
+          <li>3 × 6–8, rest 90–120 s</li>
+        </ul>
+        <h4>D. Accessory – Single-Leg Strength</h4>
+        <ul>
+          <li>Rear-foot elevated split squat, walking lunge, or step-up</li>
+          <li>2–3 × 8–10/leg</li>
+        </ul>
+        <h4>E. Upper Back Pull</h4>
+        <ul>
+          <li>1-arm DB row, chest-supported row, or seated cable row</li>
+          <li>3 × 8–12</li>
+        </ul>
+        <h4>F. Core Finisher (RC2 mini-block) – 5–7 min</h4>
+        <ul>
+          <li>2–3 rounds: Pallof press x 10/side, dead bug x 6–8/side, side plank x 20–30 s/side</li>
         </ul>
       `,
       Quick: `
         <h3>ST1 – Heavy Strength – Lower – Quick (15–20 min)</h3>
+        <p><strong>Goal:</strong> One meaningful heavy-ish lower pattern plus some trunk.</p>
+        <h4>A. Fast Warm-up – 3–5 min</h4>
         <ul>
-          <li><strong>Short warm-up</strong></li>
-          <li><strong>Main lower pattern:</strong> reduced sets</li>
-          <li><strong>One quick core exercise</strong></li>
+          <li>1–2 min easy cardio</li>
+          <li>1 set each: bodyweight squat x 10, reverse lunge x 5/leg</li>
+        </ul>
+        <h4>B. Main Lift – Squat or Trap Bar Deadlift</h4>
+        <ul>
+          <li>Back/front squat or trap bar deadlift</li>
+          <li>3 × 4–6 @ RPE 7–8, rest 90–120 s</li>
+        </ul>
+        <h4>C. Superset – Row + Core (RC2)</h4>
+        <ul>
+          <li>2–3 rounds: 1-arm DB row x 8–10/arm, front plank x 30–40 s</li>
         </ul>
       `,
       Easy: `
         <h3>ST1 – Heavy Strength – Lower – Easy (10–20 min)</h3>
+        <p><strong>Goal:</strong> Keep tissue loaded and mobile without real fatigue.</p>
+        <h4>A. Prep & Mobility – 5–10 min</h4>
         <ul>
-          <li><strong>Light movement prep</strong></li>
-          <li><strong>Bodyweight / lighter lower pattern</strong></li>
-          <li><strong>Extra mobility (RC1)</strong> + gentle trunk work</li>
+          <li>1–2 min easy cardio</li>
+          <li>1–2 rounds: 90/90 hip rotations x 6–8/side, deep squat sit x 20–30 s, glute bridge x 10–12, cat-camel x 6–8</li>
+        </ul>
+        <h4>B. Light Strength Pattern – 5–10 min</h4>
+        <ul>
+          <li>2–3 rounds: bodyweight/light goblet squat x 8–10, split squat x 6–8/leg, light farmer carry x 20–30 m</li>
         </ul>
       `
     },
     UpperTotal: {
       Standard: `
         <h3>ST1 – Heavy Strength – Upper/Total – Standard (30–45 min)</h3>
+        <p><strong>Goal:</strong> Build upper-body pressing/pulling strength and trunk stability with a small lower/total piece.</p>
+        <h4>A. Warm-up – 5–8 min</h4>
         <ul>
-          <li><strong>Warm-up</strong></li>
-          <li><strong>Main upper push or pull</strong></li>
-          <li><strong>Complementary push/pull pattern</strong></li>
-          <li><strong>Light lower or total-body pattern</strong> (e.g., RDLs or split squats)</li>
-          <li><strong>Core finisher (RC2)</strong></li>
+          <li>2–3 min light cardio</li>
+          <li>1–2 rounds: band pull-apart x 12–15, scap push-up x 8–10, shoulder circles x 10/dir, light band/DB external rotation x 10/side</li>
+        </ul>
+        <h4>B. Main Upper Push</h4>
+        <ul>
+          <li>Bench press (barbell/DB), incline DB press, or DB OHP</li>
+          <li>4 × 4–6 @ RPE 7–8</li>
+        </ul>
+        <h4>C. Main Upper Pull</h4>
+        <ul>
+          <li>Pull-up/chin-up, lat pulldown, or row variation</li>
+          <li>4 × 6–8 (superset with B if desired)</li>
+        </ul>
+        <h4>D. Light Lower or Total-Body Pattern</h4>
+        <ul>
+          <li>RDL, KB swing, goblet squat, or light trap bar deadlift</li>
+          <li>2–3 × 6–8 @ RPE ~6</li>
+        </ul>
+        <h4>E. Accessory Shoulder / Upper Back</h4>
+        <ul>
+          <li>Lateral raise, face pull, rear delt fly</li>
+          <li>2–3 × 10–15 each (pick 1–2)</li>
+        </ul>
+        <h4>F. Core Finisher (RC2 mini-block) – 5–7 min</h4>
+        <ul>
+          <li>2–3 rounds: half-kneeling cable/band chop x 10/side, dead bug x 6–8/side, suitcase carry x 20–30 m/side</li>
         </ul>
       `,
       Quick: `
         <h3>ST1 – Heavy Strength – Upper/Total – Quick (15–20 min)</h3>
+        <h4>A. Fast Warm-up – 3–5 min</h4>
         <ul>
-          <li><strong>Short warm-up</strong></li>
-          <li><strong>One upper compound</strong> (push or pull)</li>
-          <li><strong>One core exercise</strong></li>
+          <li>1–2 min cardio</li>
+          <li>1 set: band pull-apart x 12, knee push-ups x 8–10</li>
+        </ul>
+        <h4>B. Push–Pull Superset</h4>
+        <ul>
+          <li>DB bench + 1-arm DB row OR push-up + inverted/TRX row</li>
+          <li>3 × 6–8 each @ RPE ~7</li>
+        </ul>
+        <h4>C. Core – Quick Hit</h4>
+        <ul>
+          <li>2 rounds: side plank x 30–40 s/side OR Pallof press x 10–12/side</li>
         </ul>
       `,
       Easy: `
         <h3>ST1 – Heavy Strength – Upper/Total – Easy (10–20 min)</h3>
+        <p><strong>Goal:</strong> Shoulder health and patterning.</p>
+        <h4>A. Shoulder / T-Spine Mobility – 5–10 min</h4>
         <ul>
-          <li><strong>Easy upper activation</strong> (bands, light DBs)</li>
-          <li><strong>Mobility for shoulders/T-spine (RC1)</strong></li>
-          <li><strong>Light core (RC2)</strong></li>
+          <li>1–2 rounds: wall slides x 8–10, quadruped T-spine rotation x 6–8/side, band dislocates x 8–10, scap push-ups x 6–8</li>
+        </ul>
+        <h4>B. Light Strength & Activation – 5–10 min</h4>
+        <ul>
+          <li>2–3 rounds: band row x 12–15, elevated push-up x 6–8, very light DB curl + press x 8–10</li>
+        </ul>
+        <h4>C. Optional Core</h4>
+        <ul>
+          <li>Bird-dog x 6–8/side for 1–2 rounds</li>
         </ul>
       `
     }
@@ -89,53 +167,118 @@ const workoutTemplates = {
   ST2: {
     Linear: {
       Standard: `
-        <h3>ST2 – Speed / Power – Linear – Standard (30–45 min)</h3>
+        <h3>ST2 – Speed / Power – Linear – Standard (30–40 min)</h3>
+        <h4>A. Dynamic Warm-up – 5–8 min</h4>
         <ul>
-          <li><strong>Dynamic warm-up</strong></li>
-          <li><strong>1–2 low-volume jump drills</strong> (e.g., vertical or broad)</li>
-          <li><strong>1 speed-strength lift</strong> (e.g., fast squat/press variation)</li>
-          <li><strong>Short core block (RC2)</strong></li>
+          <li>1–2 rounds: 2–3 min rope/jog, walking lunges x 6–8/leg, leg swings x 10/leg, arm circles + scap push-ups x 8–10</li>
+        </ul>
+        <h4>B. Jump Block</h4>
+        <ul>
+          <li>CMJ, box jump, or broad jump</li>
+          <li>4 × 3–4 reps, full reset, stick landings</li>
+        </ul>
+        <h4>C. Speed-Strength Lower Lift</h4>
+        <ul>
+          <li>Speed trap bar deadlift, speed squat, or KB swing</li>
+          <li>4 × 3–5 fast reps @ light–moderate load</li>
+        </ul>
+        <h4>D. Upper-Body Power</h4>
+        <ul>
+          <li>Speed DB bench, medball chest pass, or plyo push-up</li>
+          <li>3–4 × 3–5 explosive reps</li>
+        </ul>
+        <h4>E. Core / Bracing (RC2-style) – 5–7 min</h4>
+        <ul>
+          <li>2–3 rounds: tall-kneeling rollout x 6–8, farmer/trap bar carry x 20–30 m, side plank x 20–30 s/side</li>
         </ul>
       `,
       Quick: `
         <h3>ST2 – Speed / Power – Linear – Quick (15–20 min)</h3>
+        <h4>A. Fast Warm-up – 3–4 min</h4>
         <ul>
-          <li><strong>Short dynamic warm-up</strong></li>
-          <li><strong>1 jump drill</strong></li>
-          <li><strong>1 short speed-strength pattern</strong></li>
+          <li>1–2 min rope/bike</li>
+          <li>BW squat x 10, walking lunge x 5/leg</li>
+        </ul>
+        <h4>B. Jump Block</h4>
+        <ul>
+          <li>Box jump or CMJ</li>
+          <li>3 × 3 reps</li>
+        </ul>
+        <h4>C. Speed-Strength Lift</h4>
+        <ul>
+          <li>Speed trap bar DL, goblet squat, or KB swing</li>
+          <li>3 × 3–5 reps</li>
+        </ul>
+        <h4>D. Optional Core</h4>
+        <ul>
+          <li>1–2 rounds: farmer carry x 20 m, plank x 30 s</li>
         </ul>
       `,
       Easy: `
         <h3>ST2 – Speed / Power – Linear – Easy (10–20 min)</h3>
+        <h4>A. Low-Impact Elastic Series – 5–10 min</h4>
         <ul>
-          <li><strong>Very low-impact pogo / skip / bounce style work</strong></li>
-          <li><strong>Core activation</strong>, no heavy or high-impact work</li>
+          <li>2–3 rounds (easy): ankle pogos x 10–15, skips for height/distance x 10–15 m, A-march/skip x 10–15 m</li>
+        </ul>
+        <h4>B. Light Power Circuit – 5–10 min</h4>
+        <ul>
+          <li>2–3 rounds: light KB swing x 8, light medball chest pass/scoop x 6, bird-dog x 6/side</li>
         </ul>
       `
     },
     Rotational: {
       Standard: `
-        <h3>ST2 – Speed / Power – Rotational – Standard (30–45 min)</h3>
+        <h3>ST2 – Speed / Power – Rotational – Standard (30–40 min)</h3>
+        <h4>A. Dynamic Warm-up – 5–8 min</h4>
         <ul>
-          <li><strong>Dynamic warm-up</strong></li>
-          <li><strong>1–2 rotational / lateral medball drills</strong></li>
-          <li><strong>1 speed-strength pattern</strong> with rotational or lateral emphasis</li>
-          <li><strong>Anti-rotation / carry-focused core (RC2)</strong></li>
+          <li>1–2 rounds: 2–3 min light cardio or shadowboxing, lateral lunge x 6/side, quadruped T-spine rotation x 6–8/side, band pull-aparts x 10–15</li>
+        </ul>
+        <h4>B. Rotational Medball Block</h4>
+        <ul>
+          <li>Choose 1–2: rotational scoop toss vs wall, step-behind rotational throw, rotational chest pass</li>
+          <li>4–6 sets × 3–5 reps/side</li>
+        </ul>
+        <h4>C. Lateral Power / COD</h4>
+        <ul>
+          <li>Lateral bounds, lateral step + bound, or box step-off to stick</li>
+          <li>3–4 × 3–4 reps/side</li>
+        </ul>
+        <h4>D. Speed-Strength Lift (Rotational/Lateral Bias)</h4>
+        <ul>
+          <li>Split squat jump, landmine rotational press, or cable/band rotational chop</li>
+          <li>3–4 × 3–5 fast reps/side</li>
+        </ul>
+        <h4>E. Anti-Rotation Core (RC2-style) – 5–7 min</h4>
+        <ul>
+          <li>2–3 rounds: Pallof press x 10–12/side, half-kneeling chop x 8–10/side, suitcase carry x 20–30 m/side</li>
         </ul>
       `,
       Quick: `
         <h3>ST2 – Speed / Power – Rotational – Quick (15–20 min)</h3>
+        <h4>A. Fast Warm-up – 3–4 min</h4>
         <ul>
-          <li><strong>Short warm-up</strong></li>
-          <li><strong>1 rotational medball drill</strong></li>
-          <li><strong>1 core/stability movement</strong> (anti-rotation)</li>
+          <li>1–2 min shadowboxing</li>
+          <li>Lateral lunge x 6/side, T-spine rotation x 6/side</li>
+        </ul>
+        <h4>B. Medball Rotational Power</h4>
+        <ul>
+          <li>Step-behind throw or scoop toss</li>
+          <li>4 × 3–4 reps/side</li>
+        </ul>
+        <h4>C. Anti-Rotation Finisher</h4>
+        <ul>
+          <li>2–3 rounds: Pallof press x 8–10/side, side plank x 20–30 s/side</li>
         </ul>
       `,
       Easy: `
         <h3>ST2 – Speed / Power – Rotational – Easy (10–20 min)</h3>
+        <h4>A. Mobility & Patterning – 5–10 min</h4>
         <ul>
-          <li><strong>Light medball / band rotational patterns</strong> (no max effort)</li>
-          <li><strong>Gentle core emphasis</strong></li>
+          <li>2–3 rounds: T-spine open book x 6–8/side, 90/90 hip switches x 6–8/side, standing light band rotations x 10/side</li>
+        </ul>
+        <h4>B. Light Rotational & Core Circuit – 5–10 min</h4>
+        <ul>
+          <li>2–3 rounds @ RPE 4–5: light medball torso rotation (no throw) x 10/side, bird-dog x 6–8/side, light suitcase carry x 15–20 m/side</li>
         </ul>
       `
     }
@@ -146,24 +289,24 @@ const workoutTemplates = {
       Standard: `
         <h3>CD1 – Intervals / Tempo – Boxing – Standard (30–45 min)</h3>
         <ul>
-          <li><strong>Warm-up (shadow)</strong></li>
-          <li><strong>6–8 rounds</strong> of bag/shadow intervals or tempo work</li>
-          <li><strong>Cool-down</strong> + mobility (RC1)</li>
+          <li>Warm-up (shadow)</li>
+          <li>6–8 rounds intervals/tempo</li>
+          <li>Short RC1 mobility</li>
         </ul>
       `,
       Quick: `
         <h3>CD1 – Intervals / Tempo – Boxing – Quick (15–20 min)</h3>
         <ul>
-          <li><strong>Short warm-up</strong></li>
-          <li><strong>4–6 focused rounds</strong> at moderate-hard pace</li>
-          <li><strong>Very short cool-down</strong></li>
+          <li>Short warm-up</li>
+          <li>4–6 focused rounds (moderate-hard)</li>
+          <li>Brief cool-down</li>
         </ul>
       `,
       Easy: `
         <h3>CD1 – Intervals / Tempo – Boxing – Easy (10–20 min)</h3>
         <ul>
-          <li><strong>Technique-tempo rounds</strong> (RPE ≤ 6/10)</li>
-          <li><strong>Mobility</strong> 5–10 min (RC1)</li>
+          <li>Technique-tempo rounds (RPE ≤ 6)</li>
+          <li>5–10 min RC1 mobility</li>
         </ul>
       `
     },
@@ -171,24 +314,23 @@ const workoutTemplates = {
       Standard: `
         <h3>CD1 – Intervals / Tempo – Engine – Standard (30–45 min)</h3>
         <ul>
-          <li><strong>Warm-up</strong></li>
-          <li><strong>Intervals/tempos</strong> on run/bike/erg</li>
-          <li><strong>Short cool-down</strong></li>
+          <li>Warm-up</li>
+          <li>15–25 min intervals or tempos</li>
+          <li>Short cool-down</li>
         </ul>
       `,
       Quick: `
         <h3>CD1 – Intervals / Tempo – Engine – Quick (15–20 min)</h3>
         <ul>
-          <li><strong>Short warm-up</strong></li>
-          <li><strong>6–10 short intervals</strong> (not max)</li>
-          <li><strong>Quick cool-down</strong></li>
+          <li>Short warm-up</li>
+          <li>6–10 short intervals (not max)</li>
+          <li>Quick cool-down</li>
         </ul>
       `,
       Easy: `
         <h3>CD1 – Intervals / Tempo – Engine – Easy (10–20 min)</h3>
         <ul>
-          <li><strong>Light tempo or fartlek</strong> (easy/moderate switches)</li>
-          <li><strong>Keep intensity low–moderate</strong></li>
+          <li>Light tempo/fartlek (easy/moderate switches)</li>
         </ul>
       `
     }
@@ -199,21 +341,20 @@ const workoutTemplates = {
       Standard: `
         <h3>CD2 – Easy Aerobic – Run/Walk – Standard (30–45 min)</h3>
         <ul>
-          <li><strong>Easy steady run/jog or brisk walk</strong></li>
-          <li><strong>Relaxed breathing</strong>; conversational pace</li>
+          <li>Easy steady run/jog/brisk walk</li>
         </ul>
       `,
       Quick: `
         <h3>CD2 – Easy Aerobic – Run/Walk – Quick (15–20 min)</h3>
         <ul>
-          <li><strong>Short run/jog/walk</strong> at easy pace</li>
+          <li>Short easy run/jog/walk</li>
         </ul>
       `,
       Easy: `
         <h3>CD2 – Easy Aerobic – Run/Walk – Easy (10–20 min)</h3>
         <ul>
-          <li><strong>Very light walk</strong></li>
-          <li>Optional: longer mobility block (RC1)</li>
+          <li>Very light walk</li>
+          <li>Optional RC1 mobility</li>
         </ul>
       `
     },
@@ -221,21 +362,21 @@ const workoutTemplates = {
       Standard: `
         <h3>CD2 – Easy Aerobic – Nonimpact – Standard (30–45 min)</h3>
         <ul>
-          <li><strong>Easy steady bike/row/elliptical</strong></li>
-          <li>Optional: short mobility after (RC1)</li>
+          <li>Easy steady bike/row/etc.</li>
+          <li>Optional RC1 mobility</li>
         </ul>
       `,
       Quick: `
         <h3>CD2 – Easy Aerobic – Nonimpact – Quick (15–20 min)</h3>
         <ul>
-          <li><strong>Short nonimpact steady cardio</strong></li>
+          <li>Short nonimpact steady cardio</li>
         </ul>
       `,
       Easy: `
         <h3>CD2 – Easy Aerobic – Nonimpact – Easy (10–20 min)</h3>
         <ul>
-          <li><strong>Very light spin/erg</strong></li>
-          <li><strong>Mobility (RC1)</strong> + optional light core (RC2)</li>
+          <li>Very light spin/erg</li>
+          <li>RC1/RC2 optional</li>
         </ul>
       `
     }
@@ -244,71 +385,61 @@ const workoutTemplates = {
   BK3: {
     Footwork: {
       Standard: `
-        <h3>BK3 – Quick Solo Boxing – Footwork (≈15–20 min)</h3>
+        <h3>BK3 – Quick Solo Boxing – Footwork (15–20 min)</h3>
         <ul>
-          <li>Ring movement patterns</li>
-          <li>Pivots, step-and-slide, defensive footwork</li>
-          <li>Small space friendly (line/ladder optional)</li>
+          <li>Ring movement, pivots, step-and-slide, defensive footwork</li>
         </ul>
       `,
       Quick: `
-        <h3>BK3 – Quick Solo Boxing – Footwork (≈10–15 min)</h3>
+        <h3>BK3 – Quick Solo Boxing – Footwork (15–20 min)</h3>
         <ul>
-          <li>Shorter footwork-only block</li>
-          <li>Focus on crisp reps and balance</li>
+          <li>Ring movement, pivots, step-and-slide, defensive footwork</li>
         </ul>
       `,
       Easy: `
-        <h3>BK3 – Quick Solo Boxing – Footwork (Easy, ≈10–15 min)</h3>
+        <h3>BK3 – Quick Solo Boxing – Footwork (15–20 min)</h3>
         <ul>
-          <li>Low intensity movement quality</li>
-          <li>Technique-first, stay fresh</li>
+          <li>Ring movement, pivots, step-and-slide, defensive footwork</li>
         </ul>
       `
     },
     BagWork: {
       Standard: `
-        <h3>BK3 – Quick Solo Boxing – Bag Work (≈15–20 min)</h3>
+        <h3>BK3 – Quick Solo Boxing – Bag Work (15–20 min)</h3>
         <ul>
-          <li>Short, focused rounds (jab-only, body shots, power rounds, etc.)</li>
-          <li>Moderate intensity unless planned as CD1-Boxing</li>
+          <li>Short focused rounds (jab-only, body shots, power rounds, etc.)</li>
         </ul>
       `,
       Quick: `
-        <h3>BK3 – Quick Solo Boxing – Bag Work (≈10–15 min)</h3>
+        <h3>BK3 – Quick Solo Boxing – Bag Work (15–20 min)</h3>
         <ul>
-          <li>Fewer focused rounds</li>
-          <li>Stay technical; avoid empty fatigue</li>
+          <li>Short focused rounds (jab-only, body shots, power rounds, etc.)</li>
         </ul>
       `,
       Easy: `
-        <h3>BK3 – Quick Solo Boxing – Bag Work (Easy, ≈10–15 min)</h3>
+        <h3>BK3 – Quick Solo Boxing – Bag Work (15–20 min)</h3>
         <ul>
-          <li>Light, technical rounds</li>
-          <li>Keep pace comfortable</li>
+          <li>Short focused rounds (jab-only, body shots, power rounds, etc.)</li>
         </ul>
       `
     },
     ShadowDefense: {
       Standard: `
-        <h3>BK3 – Quick Solo Boxing – Shadowboxing / Defense (≈15–20 min)</h3>
+        <h3>BK3 – Quick Solo Boxing – Shadow/Defense (15–20 min)</h3>
         <ul>
-          <li>Head movement, guard position, combinations in the air</li>
-          <li>Visualization encouraged</li>
+          <li>Head movement, guard, combos in air, visualization</li>
         </ul>
       `,
       Quick: `
-        <h3>BK3 – Quick Solo Boxing – Shadowboxing / Defense (≈10–15 min)</h3>
+        <h3>BK3 – Quick Solo Boxing – Shadow/Defense (15–20 min)</h3>
         <ul>
-          <li>Short technical rounds</li>
-          <li>Emphasize clean form and breathing</li>
+          <li>Head movement, guard, combos in air, visualization</li>
         </ul>
       `,
       Easy: `
-        <h3>BK3 – Quick Solo Boxing – Shadowboxing / Defense (Easy, ≈10–15 min)</h3>
+        <h3>BK3 – Quick Solo Boxing – Shadow/Defense (15–20 min)</h3>
         <ul>
-          <li>Very light technical flow</li>
-          <li>Focus on smoothness and posture</li>
+          <li>Head movement, guard, combos in air, visualization</li>
         </ul>
       `
     }
@@ -647,8 +778,46 @@ function renderLog() {
     notesCell.textContent = session.notes || '';
     tr.appendChild(notesCell);
 
+    const actionsCell = document.createElement('td');
+    const deleteButton = document.createElement('button');
+    deleteButton.type = 'button';
+    deleteButton.textContent = 'Delete';
+    deleteButton.addEventListener('click', async () => {
+      if (!session.id) {
+        alert('Unable to delete this session because no ID was found.');
+        return;
+      }
+
+      const confirmed = window.confirm('Delete this session? This cannot be undone.');
+      if (!confirmed) return;
+
+      await deleteSession(session.id);
+    });
+    actionsCell.appendChild(deleteButton);
+    tr.appendChild(actionsCell);
+
     tbody.appendChild(tr);
   });
+}
+
+async function deleteSession(sessionId) {
+  try {
+    const { error } = await supabaseClient
+      .from('sessions')
+      .delete()
+      .eq('id', sessionId);
+
+    if (error) {
+      console.error('Error deleting session from Supabase:', error);
+      alert('Error deleting session from Supabase.');
+      return;
+    }
+
+    await loadSessions();
+  } catch (err) {
+    console.error('Unexpected error deleting session:', err);
+    alert('Unexpected error deleting session.');
+  }
 }
 
 async function saveCurrentSession() {
