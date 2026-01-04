@@ -13,6 +13,20 @@
       <button id="nav-session">Session Details</button>
       <button id="nav-log">Log & Analytics</button>
     </nav>
+    <div class="timezone-bar">
+      <span id="current-time">--:--</span>
+      <label for="timezone-select">Time zone:</label>
+      <select id="timezone-select">
+        <option value="America/New_York">NYC</option>
+        <option value="America/Chicago">Chicago</option>
+        <option value="America/Denver">Denver</option>
+        <option value="America/Los_Angeles">LA</option>
+        <option value="America/Phoenix">Phoenix</option>
+        <option value="America/Anchorage">Anchorage</option>
+        <option value="Pacific/Honolulu">Honolulu</option>
+        <option value="UTC">UTC</option>
+      </select>
+    </div>
   </header>
 
   <main>
@@ -86,6 +100,7 @@
                 <th>Gear</th>
                 <th>RPE</th>
                 <th>Notes</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody id="sessions-table-body">
