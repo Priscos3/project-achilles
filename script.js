@@ -755,7 +755,9 @@ function renderLog() {
 
     const dateCell = document.createElement('td');
     const date = session.date ? new Date(session.date) : null;
-    dateCell.textContent = date ? date.toLocaleString() : '';
+    dateCell.textContent = date
+      ? date.toLocaleString(undefined, { timeZone: userTimeZone })
+      : '';
     tr.appendChild(dateCell);
 
     const typeCell = document.createElement('td');
