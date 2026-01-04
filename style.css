@@ -49,6 +49,9 @@ section {
   padding: 1.5rem;
   max-width: 600px;
   width: 90%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
   border-radius: 8px;
   z-index: 1001;
 }
@@ -62,4 +65,30 @@ section {
 
 .modal-content h2 {
   margin-top: 0;
+}
+
+#workout-modal-body {
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  max-height: 60vh;
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+#workout-modal-body h3,
+#workout-modal-body h4 {
+  margin: 0.75rem 0 0.35rem;
+}
+
+#workout-modal-body p {
+  margin: 0.4rem 0;
+}
+
+#workout-modal-body ul {
+  margin: 0.35rem 0 0.6rem 1.1rem;
+  padding: 0;
+}
+
+#workout-modal-body li {
+  margin: 0.2rem 0;
 }
