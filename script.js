@@ -746,8 +746,6 @@ function renderLog() {
   const tbody = document.getElementById('sessions-table-body');
   if (!tbody) return;
 
-  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
   // Clear existing rows
   tbody.innerHTML = '';
 
