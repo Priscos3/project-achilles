@@ -778,8 +778,46 @@ function renderLog() {
     notesCell.textContent = session.notes || '';
     tr.appendChild(notesCell);
 
+    const actionsCell = document.createElement('td');
+    const deleteButton = document.createElement('button');
+    deleteButton.type = 'button';
+    deleteButton.textContent = 'Delete';
+    deleteButton.addEventListener('click', async () => {
+      if (!session.id) {
+        alert('Unable to delete this session because no ID was found.');
+        return;
+      }
+
+      const confirmed = window.confirm('Delete this session? This cannot be undone.');
+      if (!confirmed) return;
+
+      await deleteSession(session.id);
+    });
+    actionsCell.appendChild(deleteButton);
+    tr.appendChild(actionsCell);
+
     tbody.appendChild(tr);
   });
+}
+
+async function deleteSession(sessionId) {
+  try {
+    const { error } = await supabaseClient
+      .from('sessions')
+      .delete()
+      .eq('id', sessionId);
+
+    if (error) {
+      console.error('Error deleting session from Supabase:', error);
+      alert('Error deleting session from Supabase.');
+      return;
+    }
+
+    await loadSessions();
+  } catch (err) {
+    console.error('Unexpected error deleting session:', err);
+    alert('Unexpected error deleting session.');
+  }
 }
 
 async function saveCurrentSession() {
