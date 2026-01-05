@@ -11,55 +11,6 @@ console.log('Supabase client initialized');
 // This will hold your past sessions in memory for now
 let sessions = [];
 
-const DEFAULT_TIMEZONE = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
-const timezoneSelect = document.getElementById('timezone-select');
-const currentTimeDisplay = document.getElementById('current-time');
-const timezoneApplyButton = document.getElementById('timezone-apply');
-
-function getSelectedTimeZone() {
-  if (timezoneSelect && timezoneSelect.value) {
-    return timezoneSelect.value;
-  }
-  return DEFAULT_TIMEZONE;
-}
-
-function updateTimeDisplay() {
-  if (!currentTimeDisplay) return;
-  const timeZone = getSelectedTimeZone();
-  const now = new Date();
-  currentTimeDisplay.textContent = now.toLocaleTimeString(undefined, {
-    timeZone,
-    hour: '2-digit',
-    minute: '2-digit'
-  });
-}
-
-function loadSavedTimeZone() {
-  if (!timezoneSelect) return;
-  const savedZone = localStorage.getItem('preferredTimeZone');
-  timezoneSelect.value = savedZone || DEFAULT_TIMEZONE;
-}
-
-function applySelectedTimeZone() {
-  if (!timezoneSelect) return;
-  localStorage.setItem('preferredTimeZone', timezoneSelect.value);
-  updateTimeDisplay();
-  renderLog();
-}
-
-if (timezoneSelect) {
-  loadSavedTimeZone();
-  updateTimeDisplay();
-  timezoneSelect.addEventListener('change', applySelectedTimeZone);
-}
-
-if (timezoneApplyButton) {
-  timezoneApplyButton.addEventListener('click', applySelectedTimeZone);
-}
-
-updateTimeDisplay();
-setInterval(updateTimeDisplay, 60000);
-
 // ---- Helper functions for "Today" suggestion ----
 
 // Engine session types we care about in the loop
@@ -796,8 +747,8 @@ function renderLog() {
   const tbody = document.getElementById('sessions-table-body');
   if (!tbody) return;
 
-  const timeZone = getSelectedTimeZone();
-  const dateTimeOptions = timeZone ? { timeZone } : undefined;
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const dateTimeOptions = userTimeZone ? { timeZone: userTimeZone } : undefined;
   const formatSessionDate = (value) => {
     if (!value) return '';
     const parsed = new Date(value);
@@ -810,12 +761,15 @@ function renderLog() {
   // Clear existing rows
   tbody.innerHTML = '';
 
+
   // Add a row for each session
   sessions.forEach((session) => {
     const tr = document.createElement('tr');
 
     const dateCell = document.createElement('td');
-    dateCell.textContent = formatSessionDate(session.date);
+
+dateCell.textContent = formatSessionDate(session.date);
+
     tr.appendChild(dateCell);
 
     const typeCell = document.createElement('td');
