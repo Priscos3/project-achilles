@@ -537,6 +537,23 @@ const navLog = document.getElementById('nav-log');
 const viewToday = document.getElementById('view-today');
 const viewSession = document.getElementById('view-session');
 const viewLog = document.getElementById('view-log');
+const currentTimeEl = document.getElementById('current-time');
+const currentTimeZoneEl = document.getElementById('current-timezone');
+
+function updateLocalTime() {
+  if (!currentTimeEl) return;
+  const now = new Date();
+  currentTimeEl.textContent = now.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  });
+
+  if (currentTimeZoneEl) {
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    currentTimeZoneEl.textContent = timeZone || 'Local';
+  }
+}
 
 function showView(which) {
   viewToday.style.display = (which === 'today') ? 'block' : 'none';
@@ -550,6 +567,9 @@ navLog.addEventListener('click', () => showView('log'));
 
 // Show Today by default
 showView('today');
+
+updateLocalTime();
+setInterval(updateLocalTime, 1000);
 
 const sessionTypeInput = document.getElementById('session-type');
 const sessionThemeInput = document.getElementById('session-theme');
