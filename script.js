@@ -16,15 +16,157 @@ let sessions = [];
 // Engine session types we care about in the loop
 const ENGINE_TYPES = ['ST1', 'CD1', 'ST2', 'CD2'];
 
-// Theme options available for each session type
-const THEME_OPTIONS_BY_TYPE = {
-  ST1: ['Lower', 'Upper/Total'],
-  ST2: ['Linear', 'Rotational'],
-  CD1: ['Boxing', 'Engine'],
-  CD2: ['Run/Walk', 'Nonimpact'],
-  BK1: ['Boxing Class'],
-  BK3: ['Footwork', 'Bag Work', 'Shadowboxing / Defense']
+// Master data for session metadata (used for dropdowns + analytics filters)
+const MASTER_DATA = {
+  sessionTypes: {
+    ST1: {
+      label: 'ST1',
+      category: 'Strength',
+      subcategories: [
+        { id: 'st1-lower', label: 'Lower', themes: ['Lower'] },
+        { id: 'st1-upper-total', label: 'Upper/Total', themes: ['Upper/Total'] }
+      ]
+    },
+    ST2: {
+      label: 'ST2',
+      category: 'Strength',
+      subcategories: [
+        { id: 'st2-linear', label: 'Linear', themes: ['Linear'] },
+        { id: 'st2-rotational', label: 'Rotational', themes: ['Rotational'] }
+      ]
+    },
+    CD1: {
+      label: 'CD1',
+      category: 'Conditioning',
+      subcategories: [
+        { id: 'cd1-boxing', label: 'Boxing', themes: ['Boxing'] },
+        { id: 'cd1-engine', label: 'Engine', themes: ['Engine'] }
+      ]
+    },
+    CD2: {
+      label: 'CD2',
+      category: 'Conditioning',
+      subcategories: [
+        { id: 'cd2-run-walk', label: 'Run/Walk', themes: ['Run/Walk'] },
+        { id: 'cd2-nonimpact', label: 'Nonimpact', themes: ['Nonimpact'] }
+      ]
+    },
+    BK1: {
+      label: 'BK1',
+      category: 'Boxing',
+      subcategories: [
+        { id: 'bk1-class', label: 'Boxing Class', themes: ['Boxing Class'] }
+      ]
+    },
+    BK3: {
+      label: 'BK3',
+      category: 'Boxing',
+      subcategories: [
+        { id: 'bk3-footwork', label: 'Footwork', themes: ['Footwork'] },
+        { id: 'bk3-bag-work', label: 'Bag Work', themes: ['Bag Work'] },
+        {
+          id: 'bk3-shadow-defense',
+          label: 'Shadowboxing / Defense',
+          themes: ['Shadowboxing / Defense']
+        }
+      ]
+    }
+  }
 };
+
+// Theme options available for each session type
+const THEME_OPTIONS_BY_TYPE = Object.fromEntries(
+  Object.entries(MASTER_DATA.sessionTypes).map(([type, data]) => [
+    type,
+    data.subcategories.flatMap((subcategory) => subcategory.themes)
+  ])
+);
+
+const analyticsSubcategoryFilter = document.getElementById('analytics-subcategory-filter');
+
+function normalizeThemeForSubcategory(type, theme) {
+  const t = (type || '').trim();
+  let th = (theme || '').trim();
+
+  if (t === 'ST1') {
+    if (/upper/i.test(th) || /total/i.test(th)) return 'Upper/Total';
+    return 'Lower';
+  }
+
+  if (t === 'ST2') {
+    if (/rot/i.test(th)) return 'Rotational';
+    return 'Linear';
+  }
+
+  if (t === 'CD1') {
+    if (/box/i.test(th)) return 'Boxing';
+    return 'Engine';
+  }
+
+  if (t === 'CD2') {
+    if (/run/i.test(th) || /walk/i.test(th)) return 'Run/Walk';
+    return 'Nonimpact';
+  }
+
+  if (t === 'BK3') {
+    if (/foot/i.test(th)) return 'Footwork';
+    if (/bag/i.test(th)) return 'Bag Work';
+    return 'Shadowboxing / Defense';
+  }
+
+  if (t === 'BK1') {
+    return 'Boxing Class';
+  }
+
+  return th;
+}
+
+function getSessionSubcategory(session) {
+  if (!session) return '';
+  const type = (session.session_type || '').trim();
+  const typeData = MASTER_DATA.sessionTypes[type];
+  if (!typeData) return '';
+  const normalizedTheme = normalizeThemeForSubcategory(type, session.theme || '');
+  const match = typeData.subcategories.find((subcategory) =>
+    subcategory.themes.includes(normalizedTheme)
+  );
+  return match ? match.label : '';
+}
+
+function getSubcategoryOptions() {
+  const options = [];
+  Object.values(MASTER_DATA.sessionTypes).forEach((typeData) => {
+    typeData.subcategories.forEach((subcategory) => {
+      options.push(subcategory.label);
+    });
+  });
+  return Array.from(new Set(options)).sort();
+}
+
+function populateSubcategoryFilter() {
+  if (!analyticsSubcategoryFilter) return;
+  analyticsSubcategoryFilter.innerHTML = '';
+
+  const allOption = document.createElement('option');
+  allOption.value = 'all';
+  allOption.textContent = 'All subcategories';
+  analyticsSubcategoryFilter.appendChild(allOption);
+
+  getSubcategoryOptions().forEach((label) => {
+    const option = document.createElement('option');
+    option.value = label;
+    option.textContent = label;
+    analyticsSubcategoryFilter.appendChild(option);
+  });
+}
+
+function applyAnalyticsFilters(list) {
+  const selectedSubcategory = analyticsSubcategoryFilter
+    ? analyticsSubcategoryFilter.value
+    : 'all';
+  if (!selectedSubcategory || selectedSubcategory === 'all') return list;
+  return list.filter((session) => getSessionSubcategory(session) === selectedSubcategory);
+}
 
 // High-level workout templates for the modal (ALL session types)
 const workoutTemplates = {
@@ -615,6 +757,13 @@ showView('today');
 updateLocalTime();
 setInterval(updateLocalTime, 1000);
 
+populateSubcategoryFilter();
+if (analyticsSubcategoryFilter) {
+  analyticsSubcategoryFilter.addEventListener('change', () => {
+    renderLog();
+  });
+}
+
 const sessionTypeInput = document.getElementById('session-type');
 const sessionThemeInput = document.getElementById('session-theme');
 const sessionGearInput = document.getElementById('session-gear');
@@ -815,6 +964,8 @@ function renderLog() {
   const tbody = document.getElementById('sessions-table-body');
   if (!tbody) return;
 
+  const filteredSessions = applyAnalyticsFilters(sessions);
+
   const dateTimeOptions = {
     year: 'numeric',
     month: 'short',
@@ -838,7 +989,7 @@ function renderLog() {
 
 
   // Add a row for each session
-  sessions.forEach((session) => {
+  filteredSessions.forEach((session) => {
     const tr = document.createElement('tr');
 
     const dateCell = document.createElement('td');
@@ -888,7 +1039,7 @@ dateCell.textContent = formatSessionDate(session.date);
     tbody.appendChild(tr);
   });
 
-  renderWorkoutTypeChart();
+  renderWorkoutTypeChart(filteredSessions);
 }
 
 function getWeekStartDate(date) {
@@ -906,7 +1057,7 @@ function formatWeekLabel(date) {
   return date.toLocaleDateString(undefined, { month: 'short', day: '2-digit' });
 }
 
-function renderWorkoutTypeChart() {
+function renderWorkoutTypeChart(filteredSessions = sessions) {
   const chartEl = document.getElementById('workout-type-chart');
   const legendEl = document.getElementById('workout-type-legend');
   if (!chartEl || !legendEl) return;
@@ -917,7 +1068,7 @@ function renderWorkoutTypeChart() {
   const weekMap = new Map();
   const typeSet = new Set();
 
-  sessions.forEach((session) => {
+  filteredSessions.forEach((session) => {
     if (!session || !session.date) return;
     const weekStart = getWeekStartDate(session.date);
     if (!weekStart) return;

@@ -63,6 +63,28 @@ section {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
+.analytics-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.analytics-filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+
+.analytics-filters select {
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  min-width: 200px;
+}
+
 .analytics-header {
   display: flex;
   flex-direction: column;
