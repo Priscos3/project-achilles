@@ -83,64 +83,20 @@ const THEME_OPTIONS_BY_TYPE = Object.fromEntries(
 );
 
 const analyticsSubcategoryFilter = document.getElementById('analytics-subcategory-filter');
-
-function normalizeThemeForSubcategory(type, theme) {
-  const t = (type || '').trim();
-  let th = (theme || '').trim();
-
-  if (t === 'ST1') {
-    if (/upper/i.test(th) || /total/i.test(th)) return 'Upper/Total';
-    return 'Lower';
-  }
-
-  if (t === 'ST2') {
-    if (/rot/i.test(th)) return 'Rotational';
-    return 'Linear';
-  }
-
-  if (t === 'CD1') {
-    if (/box/i.test(th)) return 'Boxing';
-    return 'Engine';
-  }
-
-  if (t === 'CD2') {
-    if (/run/i.test(th) || /walk/i.test(th)) return 'Run/Walk';
-    return 'Nonimpact';
-  }
-
-  if (t === 'BK3') {
-    if (/foot/i.test(th)) return 'Footwork';
-    if (/bag/i.test(th)) return 'Bag Work';
-    return 'Shadowboxing / Defense';
-  }
-
-  if (t === 'BK1') {
-    return 'Boxing Class';
-  }
-
-  return th;
-}
+const ANALYTICS_SUBCATEGORIES = ['CD', 'SD', 'BK'];
 
 function getSessionSubcategory(session) {
   if (!session) return '';
   const type = (session.session_type || '').trim();
-  const typeData = MASTER_DATA.sessionTypes[type];
-  if (!typeData) return '';
-  const normalizedTheme = normalizeThemeForSubcategory(type, session.theme || '');
-  const match = typeData.subcategories.find((subcategory) =>
-    subcategory.themes.includes(normalizedTheme)
-  );
-  return match ? match.label : '';
+  if (!type) return '';
+  if (type.startsWith('CD')) return 'CD';
+  if (type.startsWith('ST')) return 'SD';
+  if (type.startsWith('BK')) return 'BK';
+  return '';
 }
 
 function getSubcategoryOptions() {
-  const options = [];
-  Object.values(MASTER_DATA.sessionTypes).forEach((typeData) => {
-    typeData.subcategories.forEach((subcategory) => {
-      options.push(subcategory.label);
-    });
-  });
-  return Array.from(new Set(options)).sort();
+  return [...ANALYTICS_SUBCATEGORIES];
 }
 
 function populateSubcategoryFilter() {
