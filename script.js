@@ -540,6 +540,23 @@ const viewLog = document.getElementById('view-log');
 const currentTimeEl = document.getElementById('current-time');
 const currentTimeZoneEl = document.getElementById('current-timezone');
 
+function getLocalIsoString(date = new Date()) {
+  const offsetMinutes = -date.getTimezoneOffset();
+  const sign = offsetMinutes >= 0 ? '+' : '-';
+  const pad = (value) => String(Math.abs(value)).padStart(2, '0');
+  const hoursOffset = pad(Math.floor(Math.abs(offsetMinutes) / 60));
+  const minutesOffset = pad(Math.abs(offsetMinutes) % 60);
+  const year = date.getFullYear();
+  const month = pad(date.getMonth() + 1);
+  const day = pad(date.getDate());
+  const hours = pad(date.getHours());
+  const minutes = pad(date.getMinutes());
+  const seconds = pad(date.getSeconds());
+  const milliseconds = String(date.getMilliseconds()).padStart(3, '0');
+
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}${sign}${hoursOffset}:${minutesOffset}`;
+}
+
 function updateLocalTime() {
   if (!currentTimeEl) return;
   const now = new Date();
@@ -767,8 +784,15 @@ function renderLog() {
   const tbody = document.getElementById('sessions-table-body');
   if (!tbody) return;
 
-  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const dateTimeOptions = userTimeZone ? { timeZone: userTimeZone } : undefined;
+  const dateTimeOptions = {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    timeZoneName: 'short'
+  };
   const formatSessionDate = (value) => {
     if (!value) return '';
     const parsed = new Date(value);
@@ -856,7 +880,7 @@ async function deleteSession(sessionId) {
 
 async function saveCurrentSession() {
   const session = {
-    date: new Date().toISOString(),
+    date: getLocalIsoString(),
     session_type: sessionTypeInput.value,
     theme: sessionThemeInput.value,
     gear: sessionGearInput.value,
