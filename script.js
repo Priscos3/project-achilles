@@ -887,6 +887,177 @@ dateCell.textContent = formatSessionDate(session.date);
 
     tbody.appendChild(tr);
   });
+
+  renderWorkoutTypeChart();
+}
+
+function getWeekStartDate(date) {
+  const localDate = new Date(date);
+  if (Number.isNaN(localDate.getTime())) return null;
+  const day = localDate.getDay();
+  const diff = (day + 6) % 7;
+  const start = new Date(localDate);
+  start.setDate(localDate.getDate() - diff);
+  start.setHours(0, 0, 0, 0);
+  return start;
+}
+
+function formatWeekLabel(date) {
+  return date.toLocaleDateString(undefined, { month: 'short', day: '2-digit' });
+}
+
+function renderWorkoutTypeChart() {
+  const chartEl = document.getElementById('workout-type-chart');
+  const legendEl = document.getElementById('workout-type-legend');
+  if (!chartEl || !legendEl) return;
+
+  chartEl.innerHTML = '';
+  legendEl.innerHTML = '';
+
+  const weekMap = new Map();
+  const typeSet = new Set();
+
+  sessions.forEach((session) => {
+    if (!session || !session.date) return;
+    const weekStart = getWeekStartDate(session.date);
+    if (!weekStart) return;
+    const weekKey = weekStart.getTime();
+    if (!weekMap.has(weekKey)) {
+      weekMap.set(weekKey, { date: weekStart, counts: {} });
+    }
+    const entry = weekMap.get(weekKey);
+    const type = (session.session_type || 'Unknown').trim() || 'Unknown';
+    entry.counts[type] = (entry.counts[type] || 0) + 1;
+    typeSet.add(type);
+  });
+
+  const weeks = Array.from(weekMap.values()).sort((a, b) => a.date - b.date);
+  const types = Array.from(typeSet).sort();
+
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const width = 720;
+  const height = 320;
+  const padding = { top: 24, right: 24, bottom: 56, left: 48 };
+  const plotWidth = width - padding.left - padding.right;
+  const plotHeight = height - padding.top - padding.bottom;
+
+  if (weeks.length === 0) {
+    const emptyText = document.createElementNS(svgNS, 'text');
+    emptyText.setAttribute('x', String(width / 2));
+    emptyText.setAttribute('y', String(height / 2));
+    emptyText.setAttribute('text-anchor', 'middle');
+    emptyText.setAttribute('fill', '#666');
+    emptyText.textContent = 'No logged sessions yet.';
+    chartEl.appendChild(emptyText);
+    return;
+  }
+
+  const yMax = Math.max(
+    1,
+    ...weeks.map((week) => Math.max(0, ...Object.values(week.counts)))
+  );
+
+  const xForIndex = (index) => {
+    if (weeks.length === 1) return padding.left + plotWidth / 2;
+    return padding.left + (plotWidth * index) / (weeks.length - 1);
+  };
+  const yForValue = (value) =>
+    padding.top + plotHeight - (plotHeight * value) / yMax;
+
+  const axisLine = document.createElementNS(svgNS, 'line');
+  axisLine.setAttribute('x1', String(padding.left));
+  axisLine.setAttribute('x2', String(width - padding.right));
+  axisLine.setAttribute('y1', String(padding.top + plotHeight));
+  axisLine.setAttribute('y2', String(padding.top + plotHeight));
+  axisLine.setAttribute('stroke', '#aaa');
+  axisLine.setAttribute('stroke-width', '1');
+  chartEl.appendChild(axisLine);
+
+  const gridSteps = Math.min(4, yMax);
+  for (let i = 1; i <= gridSteps; i += 1) {
+    const value = Math.round((yMax / gridSteps) * i);
+    const y = yForValue(value);
+    const gridLine = document.createElementNS(svgNS, 'line');
+    gridLine.setAttribute('x1', String(padding.left));
+    gridLine.setAttribute('x2', String(width - padding.right));
+    gridLine.setAttribute('y1', String(y));
+    gridLine.setAttribute('y2', String(y));
+    gridLine.setAttribute('stroke', '#e0e0e0');
+    gridLine.setAttribute('stroke-width', '1');
+    chartEl.appendChild(gridLine);
+
+    const label = document.createElementNS(svgNS, 'text');
+    label.setAttribute('x', String(padding.left - 8));
+    label.setAttribute('y', String(y + 4));
+    label.setAttribute('text-anchor', 'end');
+    label.setAttribute('fill', '#666');
+    label.setAttribute('font-size', '11');
+    label.textContent = value.toString();
+    chartEl.appendChild(label);
+  }
+
+  weeks.forEach((week, index) => {
+    const x = xForIndex(index);
+    const label = document.createElementNS(svgNS, 'text');
+    label.setAttribute('x', String(x));
+    label.setAttribute('y', String(height - padding.bottom + 20));
+    label.setAttribute('text-anchor', 'middle');
+    label.setAttribute('fill', '#666');
+    label.setAttribute('font-size', '11');
+    label.textContent = formatWeekLabel(week.date);
+    chartEl.appendChild(label);
+  });
+
+  const palette = [
+    '#1f77b4',
+    '#ff7f0e',
+    '#2ca02c',
+    '#d62728',
+    '#9467bd',
+    '#8c564b',
+    '#e377c2',
+    '#7f7f7f',
+    '#bcbd22',
+    '#17becf'
+  ];
+
+  types.forEach((type, typeIndex) => {
+    const color = palette[typeIndex % palette.length];
+    const legendItem = document.createElement('span');
+    const swatch = document.createElement('i');
+    swatch.style.backgroundColor = color;
+    const label = document.createElement('span');
+    label.textContent = type;
+    legendItem.appendChild(swatch);
+    legendItem.appendChild(label);
+    legendEl.appendChild(legendItem);
+
+    const points = weeks.map((week, index) => {
+      const value = week.counts[type] || 0;
+      return { x: xForIndex(index), y: yForValue(value), value };
+    });
+
+    const path = document.createElementNS(svgNS, 'path');
+    const d = points
+      .map((point, index) =>
+        `${index === 0 ? 'M' : 'L'}${point.x},${point.y}`
+      )
+      .join(' ');
+    path.setAttribute('d', d);
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', color);
+    path.setAttribute('stroke-width', '2');
+    chartEl.appendChild(path);
+
+    points.forEach((point) => {
+      const circle = document.createElementNS(svgNS, 'circle');
+      circle.setAttribute('cx', String(point.x));
+      circle.setAttribute('cy', String(point.y));
+      circle.setAttribute('r', '3');
+      circle.setAttribute('fill', color);
+      chartEl.appendChild(circle);
+    });
+  });
 }
 
 async function deleteSession(sessionId) {
