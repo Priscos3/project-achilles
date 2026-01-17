@@ -22,6 +22,7 @@ const THEME_OPTIONS_BY_TYPE = {
   ST2: ['Linear', 'Rotational'],
   CD1: ['Boxing', 'Engine'],
   CD2: ['Run/Walk', 'Nonimpact'],
+  BK1: ['Boxing Class'],
   BK3: ['Footwork', 'Bag Work', 'Shadowboxing / Defense']
 };
 
@@ -382,6 +383,32 @@ const workoutTemplates = {
     }
   },
 
+  BK1: {
+    Class: {
+      Standard: `
+        <h3>BK1 – Boxing Class – Standard</h3>
+        <ul>
+          <li>Attend a coached class and log the gym, coach, and focus.</li>
+          <li>Note rounds, sparring, or conditioning included.</li>
+        </ul>
+      `,
+      Quick: `
+        <h3>BK1 – Boxing Class – Quick</h3>
+        <ul>
+          <li>Shorter class or open gym with class structure.</li>
+          <li>Log the key drills and rounds completed.</li>
+        </ul>
+      `,
+      Easy: `
+        <h3>BK1 – Boxing Class – Easy</h3>
+        <ul>
+          <li>Technique-focused class at lower intensity.</li>
+          <li>Log what you practiced and any notes.</li>
+        </ul>
+      `
+    }
+  },
+
   BK3: {
     Footwork: {
       Standard: `
@@ -694,6 +721,10 @@ function buildWorkoutHtml(type, theme, gear) {
     if (/foot/i.test(th)) th = 'Footwork';
     else if (/bag/i.test(th)) th = 'BagWork';
     else th = 'ShadowDefense';
+  }
+
+  if (t === 'BK1') {
+    if (/class/i.test(th)) th = 'Class';
   }
 
   const typeTemplates = workoutTemplates[t];
